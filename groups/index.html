@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIFA 2022 World Cup Groups</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-1">
+                <img src="../assets/2022_FIFA_World_Cup.svg" alt="Logo FIFA World Cup 2022" width="100px">
+            </div>
+            <div class="col">
+                <h2>FIFA 2022 World Cup Groups</h2>
+                <h6>Data Reference : https://worldcupjson.net/</h6>
+                <h6>Website designed by Rebornian48</h6>
+                <h6>&nbsp;</h6>
+            </div>
+        </div>
+        <div id="groups"></div>
+    </div>
+    <script>
+        fetch('https://worldcupjson.net/teams')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                appendData(data);
+            })
+            .catch(function (err) {
+                console.log('error: ' + err);
+            });
+        function appendData(data) {
+            var mainContainer = document.getElementById("groups");
+            for (var i = 0; i < data.groups.length; i++) {
+                var a = data.groups[i];
+                var div = document.createElement("div");
+                div.innerHTML = '<h4>Group ' + a.letter + '</h4>';
+                cont1 = mainContainer.appendChild(div);
+                var gro = Object.assign(document.createElement("table"),{className:'table table-bordered'});
+                cont1.append(gro);
+                var gro2 = Object.assign(document.createElement("thead"),{className:'table-dark '});
+                gro2.innerHTML = '<tr><td>Country</td><td>Games Played</td><td>Win</td><td>Draw</td><td>Lose</td><td>Goals For</td><td>Goals Against</td><td>Goals Differential</td><td>Points</td></tr>'
+                gro.append(gro2);
+                for(var j=0; j < a.teams.length; j++){
+                    var ab = document.createElement("tr");
+                    ab.innerHTML = '<td>' + a.teams[j].name + '</td><td>' + a.teams[j].games_played + '</td><td>' + a.teams[j].wins + '</td><td>' + a.teams[j].draws + '</td><td>' + a.teams[j].losses + '</td><td>' + a.teams[j].goals_for + '</td><td>' + a.teams[j].goals_against + '</td><td>' + a.teams[j].goal_differential + '</td><td>' + a.teams[j].group_points + '</td>';
+                    gro.appendChild(ab);
+                }
+            }
+        }
+    </script>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
+</html>
