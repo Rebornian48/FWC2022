@@ -24,3 +24,14 @@ var dateFormatted =  d.getDate() + ' ' + monthArray[d.getMonth()] + ' ' + d.getF
 </pre>
 
 Potongan kode di atas membuat data tanggal dan waktu yang diambil dari format Zulu Time (yyyy-mm-ddThh:MM:ssZ) diubah menjadi sesuai dengan keinginan kita, dalam contoh ini menjadi dd mmm yyyy
+
+<pre>
+a.teams.sort(function(a, b){
+    return b.group_points - a.group_points;
+    a.teams.sort(function(a, b){
+        return b.goal_differential - a.goal_differential;
+    });
+});
+</pre>
+
+Potongan kode di atas digunakan untuk melakukan <i>sorting</i> dengan mengurutkan poin serta selisih gol (jika poin sama, maka selisih gol akan dicek) dan diurutkan dari poin dan/atau selisih gol tertinggi ke terendah
