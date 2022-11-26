@@ -51,15 +51,24 @@
                 gro2.innerHTML = '<tr><td>Country</td><td>Games Played</td><td>Win</td><td>Draw</td><td>Lose</td><td>Goals For</td><td>Goals Against</td><td>Goals Differential</td><td>Points</td></tr>'
                 gro.append(gro2);
                 for(var j=0; j < a.teams.length; j++){
-                    var ab = document.createElement("tr");
-                    a.teams.sort(function(a, b){
-                        return b.group_points - a.group_points;
-                        a.teams.sort(function(a, b){
-                            return b.goal_differential - a.goal_differential;
-                        });
+                    var aa = document.createElement("tr");
+                    var ab = a.teams;
+                    ab.sort((a,b) => {
+                        let o1 = a.group_points;
+                        let o2 = b.group_points;
+                        
+                        let n1 = a.goal_differential;
+                        let n2 = b.goal_differential;
+
+                        if(o1 < o2) return 1;
+                        if(o1 > o2) return -1;
+                        if(n1 < n2) return 1;
+                        if(n1 > n2) return -1;
+
+                        return 0;
                     });
-                    ab.innerHTML = '<td>' + a.teams[j].name + '</td><td>' + a.teams[j].games_played + '</td><td>' + a.teams[j].wins + '</td><td>' + a.teams[j].draws + '</td><td>' + a.teams[j].losses + '</td><td>' + a.teams[j].goals_for + '</td><td>' + a.teams[j].goals_against + '</td><td>' + a.teams[j].goal_differential + '</td><td>' + a.teams[j].group_points + '</td>';
-                    gro.appendChild(ab);
+                    aa.innerHTML = '<td>' + ab[j].name + '</td><td>' + ab[j].games_played + '</td><td>' + ab[j].wins + '</td><td>' + ab[j].draws + '</td><td>' + ab[j].losses + '</td><td>' + ab[j].goals_for + '</td><td>' + ab[j].goals_against + '</td><td>' + ab[j].goal_differential + '</td><td>' + ab[j].group_points + '</td>';
+                    gro.appendChild(aa);
                 }
             }
         }

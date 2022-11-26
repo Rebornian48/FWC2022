@@ -26,11 +26,19 @@ var dateFormatted =  d.getDate() + ' ' + monthArray[d.getMonth()] + ' ' + d.getF
 Potongan kode di atas membuat data tanggal dan waktu yang diambil dari format Zulu Time (yyyy-mm-ddThh:MM:ssZ) diubah menjadi sesuai dengan keinginan kita, dalam contoh ini menjadi dd mmm yyyy
 
 <pre>
-a.teams.sort(function(a, b){
-    return b.group_points - a.group_points;
-    a.teams.sort(function(a, b){
-        return b.goal_differential - a.goal_differential;
-    });
+ab.sort((a,b) => {
+    let o1 = a.group_points;
+    let o2 = b.group_points;
+    
+    let n1 = a.goal_differential;
+    let n2 = b.goal_differential;
+
+    if(o1 < o2) return 1;
+    if(o1 > o2) return -1;
+    if(n1 < n2) return 1;
+    if(n1 > n2) return -1;
+
+    return 0;
 });
 </pre>
 
