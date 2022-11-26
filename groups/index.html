@@ -52,6 +52,12 @@
                 gro.append(gro2);
                 for(var j=0; j < a.teams.length; j++){
                     var ab = document.createElement("tr");
+                    a.teams.sort(function(a, b){
+                        return b.group_points - a.group_points;
+                        a.teams.sort(function(a, b){
+                            return b.goal_differential - a.goal_differential;
+                        });
+                    });
                     ab.innerHTML = '<td>' + a.teams[j].name + '</td><td>' + a.teams[j].games_played + '</td><td>' + a.teams[j].wins + '</td><td>' + a.teams[j].draws + '</td><td>' + a.teams[j].losses + '</td><td>' + a.teams[j].goals_for + '</td><td>' + a.teams[j].goals_against + '</td><td>' + a.teams[j].goal_differential + '</td><td>' + a.teams[j].group_points + '</td>';
                     gro.appendChild(ab);
                 }
