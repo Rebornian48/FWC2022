@@ -29,50 +29,7 @@
         <div>&nbsp;</div>
         <div id="compmatch" class="row row-cols-1 row-cols-md-4 g-4"></div>
     </div>
-    <script>
-        fetch('https://worldcupjson.net/matches')
-            .then(function (response) {
-                if(response.ok) {
-                    return response.json();
-                }
-                else {
-                    throw new Error("Jaringan Internet Sedang Bermasalah");
-                }
-            })
-            .then(function (data) {
-                appendData(data);
-            })
-            .catch(function (err) {
-                console.log('error: ' + err);
-            });
-        function appendData(data) {
-            data = data.filter(function(data){
-                return (data.status=='completed');
-            });
-            var mainContainer = document.getElementById("compmatch");
-            for (var i = 0; i < data.length; i++) {
-                var div = document.createElement("tr");
-                var d = new Date(data[i].datetime);
-                var monthArray = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-                var dateFormatted =  d.getDate() + ' ' + monthArray[d.getMonth()] + ' ' + d.getFullYear();
-                if(d.getHours()<10){
-                    var h = "0" + d.getHours()
-                }
-                else{
-                    h = d.getHours()
-                }
-                if(d.getMinutes()<10){
-                    var m = "0" + d.getMinutes()
-                }
-                else{
-                    m = d.getMinutes()
-                }
-                var timeFormatted = h + ':' + m;
-                div.innerHTML = '<div class="col"><div class="card text-center"><div class="card-header">Match ' + (i+1) + ' : ' + dateFormatted + ' ' + timeFormatted + ' WIB<br />Stadium : ' + data[i].venue + ', ' + data[i].location + '</div><div class="card-body">' + '<img border="1px" src="https://countryflagsapi.com/svg/' + data[i].home_team.name + '" alt="' + data[i].home_team.name + '" width=48 /><br />' + data[i].home_team.name + '<h3>'+ data[i].home_team.goals +'</h3><h2>-</h2><h3>'+ data[i].away_team.goals +'</h3>' + '<img border="1px" src="https://countryflagsapi.com/svg/' + data[i].away_team.name + '" alt="' + data[i].away_team.name + '" width=48 /><br />' + data[i].away_team.name + '   </div></div><div>&nbsp;</div></div>';
-                mainContainer.appendChild(div);
-            }
-        }
-    </script>
+    <script src="./script.js"></script>
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
